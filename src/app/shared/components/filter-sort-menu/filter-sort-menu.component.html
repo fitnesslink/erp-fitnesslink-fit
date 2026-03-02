@@ -1,0 +1,22 @@
+<div class="filter-sort">
+  <div class="sort-wrapper">
+    <button class="sort-btn" (click)="toggleSortMenu()">
+      Sort By
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+
+    @if (showSortMenu && sortOptions.length) {
+      <ul class="sort-menu" appClickOutside (clickOutside)="onCloseSortMenu()">
+        @for (option of sortOptions; track option.field) {
+          <li>
+            <a
+              [class.active]="activeSort?.field === option.field"
+              (click)="onSelectSort(option)">
+              {{ option.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</div>

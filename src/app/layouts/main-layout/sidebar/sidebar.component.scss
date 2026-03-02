@@ -1,0 +1,65 @@
+$sidebar-width: 254px;
+$sidebar-bg: #222b45;
+$nav-text: #a4a8b5;
+$nav-hover-bg: rgba(255, 255, 255, 0.08);
+$nav-active-bg: rgba(255, 255, 255, 0.12);
+$nav-active-text: #ffffff;
+$primary: #23af8d;
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $sidebar-width;
+  height: 100vh;
+  background: $sidebar-bg;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebar-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-logo {
+  height: 32px;
+}
+
+.sidebar-nav {
+  padding: 12px 0;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  color: $nav-text;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+
+  i {
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  &:hover {
+    background: $nav-hover-bg;
+    color: $nav-active-text;
+  }
+
+  &.active {
+    background: $nav-active-bg;
+    color: $nav-active-text;
+    border-left: 3px solid $primary;
+    padding-left: 17px;
+  }
+}

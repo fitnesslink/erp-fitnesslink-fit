@@ -1,0 +1,61 @@
+<div class="page-container">
+  <app-toolbar
+    title="Workouts"
+    [actions]="toolbarActions"
+    (actionClick)="onToolbarAction($event)" />
+
+  <div class="page-controls-row">
+    <app-searchbar (search)="onSearch($event)" />
+    <app-filter-sort-menu />
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Contributor</th>
+          <th>Status</th>
+          <th>Est. Time (min)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (page(); as pageData) {
+          @for (workout of pageData.items; track workout.id) {
+            <tr (click)="onMenuAction({ item: 'View', id: workout.id })">
+              <td>
+                <span class="name">{{ workout.name }}</span>
+              </td>
+              <td>{{ workout.contributorName || '—' }}</td>
+              <td>
+                <span class="tag" [class]="getStatusClass(workout.statusName)">
+                  {{ workout.statusName }}
+                </span>
+              </td>
+              <td>{{ workout.estimatedTime }}</td>
+              <td (click)="$event.stopPropagation()">
+                <app-table-menu
+                  [id]="workout.id"
+                  [menuItems]="menuItems"
+                  (selectedMenuItem)="onMenuAction($event)" />
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="empty-state">No workouts found.</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (page(); as pageData) {
+    <app-paging
+      [page]="pageData"
+      (nextPage)="nextPage()"
+      (previousPage)="previousPage()"
+      (selectPageSize)="selectPageSize($event)" />
+  }
+</div>

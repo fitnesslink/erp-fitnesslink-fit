@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  apiUrl: 'https://api.fitnesslink.fit/api/v1',
   firebase: {
     apiKey: 'AIzaSyAKfexq1AQ1F1Ktod2ZdtPjM60qV04uLGA',
     authDomain: 'fitneink-24d2b.firebaseapp.com',
@@ -7,7 +8,7 @@ export const environment = {
     storageBucket: 'fitneink-24d2b.firebasestorage.app',
     messagingSenderId: '864850452172',
     appId: '1:864850452172:web:41d6ef1841a09d5c592c69',
-     measurementId: "G-9KY1V5W78M"
+    measurementId: 'G-9KY1V5W78M',
   },
 };
 

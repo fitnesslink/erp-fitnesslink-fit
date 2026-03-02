@@ -1,0 +1,41 @@
+@if (page) {
+  <div class="paging">
+    <div class="page-data">
+      <span>Items per page:</span>
+
+      <div class="page-size-wrapper">
+        <button class="page-size-btn" (click)="toggleMenu()">
+          {{ page.pageSize }}
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+
+        @if (showMenu) {
+          <ul class="page-size-menu" appClickOutside (clickOutside)="onClose()">
+            @for (size of pageSizeOptions; track size) {
+              @if (showOption(size)) {
+                <li><a (click)="onSelectedMenuItem(size)">{{ size }}</a></li>
+              }
+            }
+          </ul>
+        }
+      </div>
+
+      <span class="pg-meta">{{ page.pageNumber }} of {{ page.totalPages || 1 }} pages</span>
+    </div>
+
+    <div class="page-controls">
+      <button
+        class="page-btn"
+        [disabled]="!page.hasPreviousPage"
+        (click)="previous()">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button
+        class="page-btn"
+        [disabled]="!page.hasNextPage"
+        (click)="next()">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+}

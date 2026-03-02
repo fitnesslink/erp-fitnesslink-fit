@@ -1,0 +1,61 @@
+$white: #ffffff;
+$gray-50: #f9fafb;
+
+.auth-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.auth-brand {
+  position: relative;
+  width: 40%;
+  background-image: url('https://stfitnesslinkprod.blob.core.windows.net/website/welcome.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.brand-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(35, 175, 141, 0.15));
+}
+
+.auth-form-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $gray-50;
+  padding: 2rem;
+}
+
+.auth-card {
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-logo {
+  display: block;
+  margin: 0 auto 1.5rem;
+  height: 40px;
+}
+
+@media (max-width: 768px) {
+  .auth-brand {
+    display: none;
+  }
+
+  .auth-form-side {
+    padding: 1rem;
+  }
+
+  .auth-card {
+    box-shadow: none;
+    background: transparent;
+    padding: 1.5rem;
+  }
+}

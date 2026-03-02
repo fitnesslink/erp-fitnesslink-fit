@@ -1,0 +1,45 @@
+.table-menu-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: #6b7280;
+  border-radius: 4px;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+}
+
+.menu-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  min-width: 140px;
+  list-style: none;
+  padding: 4px 0;
+  margin: 4px 0 0 0;
+
+  li a {
+    display: block;
+    padding: 8px 16px;
+    cursor: pointer;
+    color: #374151;
+    font-size: 0.875rem;
+    white-space: nowrap;
+
+    &:hover {
+      background: #f3f4f6;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<header class="app-header">
+  <div class="header-spacer"></div>
+  <div class="header-actions">
+    @if (user$ | async; as user) {
+      <span class="user-email">{{ user.email }}</span>
+    }
+    <button class="btn-sign-out" (click)="logout()">Sign Out</button>
+  </div>
+</header>

@@ -1,0 +1,105 @@
+@if (!forgotPasswordMode()) {
+  <h2>Sign in to your account</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="you@example.com"
+        autocomplete="email" />
+      @if (loginForm.get('email')?.touched && loginForm.get('email')?.hasError('required')) {
+        <span class="error">Email is required.</span>
+      }
+      @if (loginForm.get('email')?.touched && loginForm.get('email')?.hasError('email')) {
+        <span class="error">Enter a valid email address.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <div class="password-wrapper">
+        <input
+          id="password"
+          [type]="passwordVisible() ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Enter your password"
+          autocomplete="current-password" />
+        <button
+          type="button"
+          class="password-toggle"
+          (click)="togglePasswordVisibility()"
+          tabindex="-1">
+          <i [class]="passwordVisible() ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+        </button>
+      </div>
+      @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
+        <span class="error">Password is required.</span>
+      }
+      @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('minlength')) {
+        <span class="error">Password must be at least 6 characters.</span>
+      }
+    </div>
+
+    <div class="forgot-password-row">
+      <a class="forgot-link" (click)="showForgotPassword()">Forgot password?</a>
+    </div>
+
+    @if (errorMessage()) {
+      <div class="error-banner">{{ errorMessage() }}</div>
+    }
+
+    <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid || loading()">
+      {{ loading() ? 'Signing in...' : 'Sign In' }}
+    </button>
+  </form>
+
+  <div class="divider">
+    <span class="divider-text">Or continue with</span>
+  </div>
+
+  <button class="btn btn-google" type="button" (click)="onGoogleSignIn()" [disabled]="loading()">
+    <img src="google.png" alt="" class="google-icon" />
+    Sign in with Google
+  </button>
+} @else {
+  <h2>Reset your password</h2>
+  <p class="subtitle">Enter your email and we'll send you a reset link.</p>
+
+  @if (resetEmailSent()) {
+    <div class="success-banner">
+      Password reset email sent. Check your inbox.
+    </div>
+    <button class="btn btn-primary" type="button" (click)="showLogin()">
+      Back to Sign In
+    </button>
+  } @else {
+    <div class="form-group">
+      <label for="reset-email">Email</label>
+      <input
+        id="reset-email"
+        type="email"
+        [formControl]="loginForm.controls.email"
+        placeholder="you@example.com"
+        autocomplete="email" />
+    </div>
+
+    @if (errorMessage()) {
+      <div class="error-banner">{{ errorMessage() }}</div>
+    }
+
+    <button
+      class="btn btn-primary"
+      type="button"
+      (click)="onResetPassword()"
+      [disabled]="loading()">
+      {{ loading() ? 'Sending...' : 'Send Reset Link' }}
+    </button>
+
+    <button class="btn btn-link" type="button" (click)="showLogin()">
+      Back to Sign In
+    </button>
+  }
+}

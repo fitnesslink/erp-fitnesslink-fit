@@ -1,0 +1,46 @@
+$border-color: #e5e7eb;
+$gray-500: #6b7280;
+$gray-700: #374151;
+$danger: #dc2626;
+$danger-hover: #b91c1c;
+$white: #ffffff;
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: $white;
+  border-bottom: 1px solid $border-color;
+}
+
+.header-spacer {
+  flex: 1;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-email {
+  font-size: 0.875rem;
+  color: $gray-500;
+}
+
+.btn-sign-out {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: $danger;
+  color: $white;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: $danger-hover;
+  }
+}

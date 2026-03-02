@@ -1,0 +1,58 @@
+<div class="page-container">
+  <div class="detail-header">
+    <button class="btn-back" (click)="onBack()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to Programs
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading">Loading...</div>
+  } @else {
+    @if (program(); as p) {
+      <div class="detail-card">
+        <div class="detail-card-header">
+          <h2>{{ p.name }}</h2>
+          <button class="btn btn-primary" (click)="onEdit()">
+            <i class="fa-solid fa-pen"></i>
+            Edit
+          </button>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-row">
+            <span class="label">Status</span>
+            <span class="value">
+              <span class="tag" [class.published]="p.statusName.toLowerCase() === 'published'">
+                {{ p.statusName }}
+              </span>
+            </span>
+          </div>
+
+          @if (p.estimatedTime) {
+            <div class="detail-row">
+              <span class="label">Estimated Time</span>
+              <span class="value">{{ p.estimatedTime }} minutes</span>
+            </div>
+          }
+
+          @if (p.contributorName) {
+            <div class="detail-row">
+              <span class="label">Contributor</span>
+              <span class="value">{{ p.contributorName }}</span>
+            </div>
+          }
+
+          @if (p.description) {
+            <div class="detail-row full-width">
+              <span class="label">Description</span>
+              <div class="value description" [innerHTML]="p.description"></div>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="empty-state">Program not found.</div>
+    }
+  }
+</div>

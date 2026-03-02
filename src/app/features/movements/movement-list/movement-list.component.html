@@ -1,0 +1,65 @@
+<div class="page-container">
+  <app-toolbar
+    title="Movements"
+    [actions]="toolbarActions"
+    (actionClick)="onToolbarAction($event)" />
+
+  <div class="page-controls-row">
+    <app-searchbar (search)="onSearch($event)" />
+    <app-filter-sort-menu />
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Contributor</th>
+          <th>Status</th>
+          <th>Workout Sessions</th>
+          <th>Total Users</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (page(); as pageData) {
+          @for (movement of pageData.items; track movement.id) {
+            <tr (click)="onMenuAction({ item: 'View', id: movement.id })">
+              <td>
+                <div class="name-cell">
+                  <span class="name">{{ movement.name }}</span>
+                </div>
+              </td>
+              <td>{{ movement.contributorUser || movement.contributorCompany || '—' }}</td>
+              <td>
+                <span class="tag" [class]="getStatusClass(movement.status)">
+                  {{ movement.status }}
+                </span>
+              </td>
+              <td>{{ movement.workoutSessions }}</td>
+              <td>{{ movement.totalUsers }}</td>
+              <td (click)="$event.stopPropagation()">
+                <app-table-menu
+                  [id]="movement.id"
+                  [menuItems]="menuItems"
+                  (selectedMenuItem)="onMenuAction($event)" />
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-state">No movements found.</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (page(); as pageData) {
+    <app-paging
+      [page]="pageData"
+      (nextPage)="nextPage()"
+      (previousPage)="previousPage()"
+      (selectPageSize)="selectPageSize($event)" />
+  }
+</div>

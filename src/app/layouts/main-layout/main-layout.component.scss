@@ -1,0 +1,20 @@
+$sidebar-width: 254px;
+
+:host {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: $sidebar-width;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-body {
+  flex: 1;
+  padding: 24px;
+  background: #f0f4f5;
+}

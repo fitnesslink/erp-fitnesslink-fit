@@ -1,0 +1,13 @@
+<div class="table-menu-wrapper">
+  <button class="menu-trigger" (click)="onMenuOptionClick($event)">
+    <i class="fa-solid fa-ellipsis-vertical"></i>
+  </button>
+
+  @if (showMenu) {
+    <ul class="menu-dropdown" appClickOutside (clickOutside)="onClose()">
+      @for (item of menuItems; track item) {
+        <li><a (click)="onSelectedMenuItem(item)">{{ item }}</a></li>
+      }
+    </ul>
+  }
+</div>

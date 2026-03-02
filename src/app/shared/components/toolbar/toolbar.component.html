@@ -1,0 +1,17 @@
+<div class="toolbar">
+  <h2 class="toolbar-title">{{ title }}</h2>
+  <div class="toolbar-actions">
+    @for (action of actions; track action.label) {
+      <button
+        class="toolbar-btn"
+        [class.btn-primary]="action.type === 'primary'"
+        [class.btn-danger]="action.type === 'danger'"
+        (click)="onAction(action.label)">
+        @if (action.icon) {
+          <i [class]="action.icon"></i>
+        }
+        {{ action.label }}
+      </button>
+    }
+  </div>
+</div>

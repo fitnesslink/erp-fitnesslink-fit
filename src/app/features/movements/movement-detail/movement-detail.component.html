@@ -1,0 +1,51 @@
+<div class="page-container">
+  <div class="detail-header">
+    <button class="btn-back" (click)="onBack()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to Movements
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading">Loading...</div>
+  } @else {
+    @if (movement(); as m) {
+      <div class="detail-card">
+        <div class="detail-card-header">
+          <h2>{{ m.name }}</h2>
+          <button class="btn btn-primary" (click)="onEdit()">
+            <i class="fa-solid fa-pen"></i>
+            Edit
+          </button>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-row">
+            <span class="label">Status</span>
+            <span class="value">
+              <span class="tag" [class.published]="m.statusName.toLowerCase() === 'published'">
+                {{ m.statusName }}
+              </span>
+            </span>
+          </div>
+
+          @if (m.contributorName) {
+            <div class="detail-row">
+              <span class="label">Contributor</span>
+              <span class="value">{{ m.contributorName }}</span>
+            </div>
+          }
+
+          @if (m.description) {
+            <div class="detail-row full-width">
+              <span class="label">Description</span>
+              <div class="value description" [innerHTML]="m.description"></div>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="empty-state">Movement not found.</div>
+    }
+  }
+</div>
